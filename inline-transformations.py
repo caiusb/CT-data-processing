@@ -4,7 +4,7 @@ import csv
 import os
 
 transformationFile = '../CodingTracker/postprocessor_root/transformationKinds.csv';
-itemSetFolder = '../CodingTracker/postprocessor_root/MiningResults/Size';
+itemSetFolder = '../CodingTracker/postprocessor_root/MiningResults/Frequency';
 
 '''
 I read the transformations file and return an a tuple with the \
