@@ -23,10 +23,11 @@ for line in results:
 	rankings.append(line[RANKING_INDEX])
 	time.append(line[TIME_INDEX])
 
-print 'maximum ranking = ' + str(maxRankings)
 rankings = [float(x) for x in rankings]
+time = [float(x) for x in time]
+
+print 'maximum ranking = ' + str(maxRankings)
 print 'Average ranking = ' + str(common.average(rankings))
 
 print 'maximum time = ' + str(maxTime)
-time = [float(x) for x in time]
 print 'Average time = '+ str(common.average(time))
