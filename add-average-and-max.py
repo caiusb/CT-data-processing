@@ -1,22 +1,13 @@
 #!/usr/bin/python
 
-import csv
+import common
 
 recommenderFile = '../play/test-data/codechanges.txt.inferred_ast_operations.recommender'
 
 RANKING_INDEX = 1
 TIME_INDEX = 3
 
-def readCSV(file):
-	results = []
-	with open(file,'r') as csvfile:
-		reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-		header = reader.next()
-		for row in reader:
-			results.append(row)
-	return (header,results)
-
-header,results = readCSV(recommenderFile)
+header,results = common.readCSV(recommenderFile)
 nom_rows = len(results)
 num_col = len(results[0])
 

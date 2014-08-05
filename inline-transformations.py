@@ -2,22 +2,10 @@
 
 import csv
 import os
+import common
 
 transformationFile = '../CodingTracker/postprocessor_root/transformationKinds.csv';
 itemSetFolder = '../CodingTracker/postprocessor_root/MiningResults/Frequency';
-
-'''
-I read the transformations file and return an a tuple with the \
-header and the array of lines (aka transformations).
-'''
-def readTransformations(file):
-	transformations = []
-	with open(file,'r') as csvfile:
-		reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-		header = reader.next()
-		for row in reader:
-			transformations.append(row)
-	return (header, transformations)
 
 '''
 I traverse the folder structure and call the processing function on
@@ -47,7 +35,7 @@ def processItemSet(itemSetFile, transformations):
 	for line in f:
 		output.write(line)
 
-header, transformations = readTransformations(transformationFile)
+header, transformations = common.readCSV(transformationFile)
 #for i in range(len(transformations)):
 #	print(transformations[i][0])
 traverseMiningResults(itemSetFolder, transformations)
