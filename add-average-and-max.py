@@ -25,8 +25,8 @@ for line in results:
 
 print 'maximum ranking = ' + str(maxRankings)
 rankings = [float(x) for x in rankings]
-print 'Average ranking = ' + str(reduce(lambda x, y: x + y, rankings)/len(rankings))
+print 'Average ranking = ' + str(common.average(rankings))
 
 print 'maximum time = ' + str(maxTime)
 time = [float(x) for x in time]
-print 'Average time = '+ str(reduce(lambda x, y: x + y, time)/len(time))
+print 'Average time = '+ str(common.average(time))

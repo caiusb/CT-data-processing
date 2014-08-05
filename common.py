@@ -13,3 +13,5 @@ def readCSV(file):
 			transformations.append(row)
 	return (header, transformations)
 
+def average(list):
+	return reduce(lambda x, y: x + y, list)/len(list)
