@@ -45,8 +45,11 @@ for line in input:
 	common.backspace(output)
 	output.write(']')
 	output.write('/')
+	output.write('[')
 	items = candidates[1].strip('[]\n').split(',')
 	for item in items:
 		inlineItem(item,output)
+	common.backspace(output)
+	output.write(']')
 	output.write('\n')
 	currentItemCount = currentItemCount + 1
