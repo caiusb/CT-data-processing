@@ -29,8 +29,7 @@ def processItemSet(itemSetFile, transformations):
 	for item in items:
 		index = int(item) - 1
 		output.write("("+ transformations[index][1] + ":" + transformations[index][2]+"),")
-	output.seek(-1,os.SEEK_END)
-	output.truncate
+	common.backspace(output)
 	output.write("]\n")
 	#put the rest of the file in there
 	for line in f:
