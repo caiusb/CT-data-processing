@@ -23,10 +23,16 @@ def inlineItem(item,file):
 input = open(resultsFile,'r')
 output = open(humanFile,'w')
 
+maxItems = 5;
+currentItemCount = 0;
 for line in input:
+	if line == '----\n':
+		currentItemCount = 0;
 	if line[0:2] != 'C:':
 		output.write(line)
 		continue
+	if currentItemCount >= maxItems:
+		continue;
 	line = line[2:]
 	bits = line.split(' ', 1)
 	completeness = bits[0]
@@ -43,3 +49,4 @@ for line in input:
 	for item in items:
 		inlineItem(item,output)
 	output.write('\n')
+	currentItemCount = currentItemCount + 1
