@@ -36,6 +36,11 @@ for line in input:
 	current_match = candidates[0].strip('[]').split(',')
 	for item in current_match:
 		inlineItem(item,output)
+	common.backspace(output)
 	output.write(']')
 	output.write('\n')
+	output.write('/')
+	items = candidates[1].strip('[]\n').split(',')
+	for item in items:
+		inlineItem(item,output)
 
