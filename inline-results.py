@@ -27,7 +27,7 @@ for line in input:
 	if line[0:2] != 'C:':
 		output.write(line)
 		continue
-	line = line[3:]
+	line = line[2:]
 	bits = line.split(' ', 1)
 	completeness = bits[0]
 	output.write(completeness)
