@@ -9,6 +9,15 @@ humanFile = '../play/test-data/human.txt'
 KIND = 1
 TYPE = 2
 
+def inlineItem(item,file):
+	file.write('(')
+	file.write(transformation[int(item)][KIND])
+	file.write(':')
+	file.write(transformation[int(item)][TYPE])
+	file.write(')')
+	file.write(',')
+
+
 (header, transformation) = common.readCSV(transformationFile)
 
 input = open(resultsFile,'r')
@@ -26,12 +35,7 @@ for line in input:
 	output.write('[')
 	current_match = candidates[0].strip('[]').split(',')
 	for item in current_match:
-		output.write('(')
-		output.write(transformation[int(item)][KIND])
-		output.write(':')
-		output.write(transformation[int(item)][TYPE])
-		output.write(')')
-		output.write(',')
+		inlineItem(item,output)
 	output.write(']')
 	output.write('\n')
 
