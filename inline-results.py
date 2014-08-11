@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import os
 import common
 
 transformationFile = '../play/training-data/transformationKinds.csv';
