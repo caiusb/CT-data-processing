@@ -32,7 +32,7 @@ for line in input:
 		output.write(line)
 		continue
 	if currentItemCount >= maxItems:
-		continue;
+		continue
 	line = line[2:]
 	bits = line.split(' ', 1)
 	completeness = bits[0]
