@@ -19,9 +19,10 @@ for line in atomicTrans:
 def processItemSetFile(file, t):
 	f = open(file,'r')
 	output = open(file+'inline','w')
-	output.write(f.readLine())
-	output.write(f.readLine())
-	output.write(f.readLine())
+	output = open(file+'-inline','w')
+	output.write(f.readline())
+	output.write(f.readline())
+	output.write(f.readline())
 	for line in f:
 		tids = line.split(':')
 		for tid in tids:
