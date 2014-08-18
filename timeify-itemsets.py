@@ -18,7 +18,6 @@ for line in atomicTrans:
 
 def processItemSetFile(file, t):
 	f = open(file,'r')
-	output = open(file+'inline','w')
 	output = open(file+'-inline','w')
 	output.write(f.readline())
 	output.write(f.readline())
