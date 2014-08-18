@@ -17,7 +17,6 @@ def inlineItem(item,file):
 	file.write(')')
 	file.write(',')
 
-
 (header, transformation) = common.readCSV(transformationFile)
 
 input = open(resultsFile,'r')
