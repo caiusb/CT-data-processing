@@ -31,3 +31,12 @@ def backspace(file):
 	file.seek(-1,os.SEEK_END)
 	file.truncate()
 
+'''
+I traverse the folder structure and call the processing function on
+each file independently.
+'''
+def traverseMiningResults(folder, transformations, processingFunction):
+	itemSets = os.listdir(folder);
+	for itemSet in itemSets:
+		processingFunction(folder + "/" + itemSet, transformations);
+

@@ -7,15 +7,6 @@ transformationFile = '../CodingTracker/postprocessor_root/transformationKinds.cs
 itemSetFolder = '../CodingTracker/postprocessor_root/MiningResults/Frequency';
 
 '''
-I traverse the folder structure and call the processing function on
-each file independently.
-'''
-def traverseMiningResults(folder, transformations):
-	itemSets = os.listdir(folder);
-	for itemSet in itemSets:
-		processItemSet(folder + "/" + itemSet, transformations);
-
-'''
 I do the actual processing of the itemSet* files. I simply inline
 the transformation type to make them more human.
 '''
@@ -38,4 +29,4 @@ def processItemSet(itemSetFile, transformations):
 header, transformations = common.readCSV(transformationFile)
 #for i in range(len(transformations)):
 #	print(transformations[i][0])
-traverseMiningResults(itemSetFolder, transformations)
+common.traverseMiningResults(itemSetFolder, transformations, processItemSet)
