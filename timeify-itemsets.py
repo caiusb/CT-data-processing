@@ -10,7 +10,6 @@ TIMESTAMP = 2
 
 transformations = {}
 
-
 (header, atomicTrans) = common.readCSV(atomicTransformationsFile)
 
 for line in atomicTrans:
