@@ -24,6 +24,7 @@ def processItemSetFile(file, t):
 	output.write(f.readline())
 	output.write(f.readline())
 	for line in f:
+		line = line.strip('\n')
 		tids = line.split(':')
 		for tid in tids:
 			oneIds = tid.split(',')
