@@ -6,7 +6,7 @@ import os
 import base64
 
 DELIMITER_SYMBOL = '#'
-ESCAPE_SYMNOL = '~'
+ESCAPE_SYMBOL = '~'
 
 EVENT_TYPE = 'eventType'
 TIMESTAMP = 'timestamp'
@@ -23,21 +23,24 @@ FILE_NEW_SYMBOL = 'f'
 
 currentFilePath = ''
 
-def encodeFileEdited(filePath):
-	return FILE_EDITED_SYMBOL + filePath
+def escapeString(string):
+	return string.replace(DELIMITER_SYMBOL,ESCAPE_SYMBOL+DELIMITER_SYMBOL).replace(ESCAPE_SYMBOL,ESCAPE_SYMBOL+ESCAPE_SYMBOL)
+
+def encodeFileEdited(filePath, timestamp):
+	return FILE_EDITED_SYMBOL + filePath + DELIMITER_SYMBOL + timestamp + DELIMITER_SYMBOL
 
 def encodeTextChange(object):
 	global currentFilePath
 	encoded = ''
 	if object[ENTITY] != currentFilePath:
 		currentFilePath = object[ENTITY]
-		encoded = encodeFileEdited(currentFilePath)
+		encoded = encodeFileEdited(currentFilePath, object[TIMESTAMP])
 	encoded = TEXT_CHANGE_SYMBOL
-	encoded = encoded + object[TIMESTAMP] + DELIMITER_SYMBOL
 	encoded = encoded + '' + DELIMITER_SYMBOL # the unknwon replaced text
-	encoded = encoded + object[TEXT] + DELIMITER_SYMBOL
+	encoded = encoded + escapeString(object[TEXT]) + DELIMITER_SYMBOL
 	encoded = encoded + object[OFFSET] + DELIMITER_SYMBOL
 	encoded = encoded + object[LENGTH] + DELIMITER_SYMBOL
+	encoded = encoded + object[TIMESTAMP] + DELIMITER_SYMBOL
 	return encoded
 
 def encodeFileOpen(object):
@@ -56,9 +59,10 @@ def encodeResourceAdded(object):
 	encoded = FILE_NEW_SYMBOL
 	encoded += object[ENTITY]
 	if isbase64(object[ENTITY]):
-		encoded += base64.b64decode(object[TEXT]) + DELIMITER_SYMBOL
+		encoded += escapeString(base64.b64decode(object[TEXT])) + DELIMITER_SYMBOL
 	else:
-		encoded += object[TEXT] + DELIMITER_SYMBOL
+		encoded += escapeString(object[TEXT]) + DELIMITER_SYMBOL
+	encoded += object[TIMESTAMP] + DELIMITER_SYMBOL
 	return encoded
 
 def encodeResourceDeleted(object):
