@@ -57,7 +57,7 @@ def isbase64(filepath):
 
 def encodeResourceAdded(object):
 	encoded = FILE_NEW_SYMBOL
-	encoded += object[ENTITY]
+	encoded += object[ENTITY] + DELIMITER_SYMBOL
 	if isbase64(object[ENTITY]):
 		encoded += escapeString(base64.b64decode(object[TEXT])) + DELIMITER_SYMBOL
 	else:
