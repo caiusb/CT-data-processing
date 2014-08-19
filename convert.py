@@ -84,5 +84,3 @@ def traverseFiles(folder):
 	return changed
 
 print traverseFiles(sys.argv[1])
-
-
