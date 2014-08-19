@@ -42,9 +42,6 @@ def encodeFileOpen(object):
 def encodeFileClose(object):
 	return ''
 
-def encodeSnapshot(object):
-	return ''
-
 def encodeResourceAdded(object):
 	return ''
 
@@ -55,7 +52,6 @@ typefunctions= {
 	'textChange': encodeTextChange,
 	'fileOpen': encodeFileOpen,
 	'fileClose': encodeFileClose,
-	'snapshot': encodeSnapshot,
 	'resourceAdded': encodeResourceAdded,
 	'resourceDeleted': encodeResourceDeleted,
 }
