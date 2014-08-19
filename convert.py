@@ -4,10 +4,37 @@ import json
 import sys
 import os
 
+DELIMITER_SYMBOL = '#'
+ESCAPE_SYMNOL = '~'
+
+EVENT_TYPE = 'eventType'
+TIMESTAMP = 'timestamp'
+ENTITY = 'entityAddress'
+TEXT = 'text'
+OFFSET = 'offset'
+LENGTH = 'len'
+
+TEXT_CHANGE_SYMBOL = 't'
+FILE_EDITED_SYMBOL = 'e'
+
 currentFilePath = ''
 
+def encodeFileEdited(filePath):
+	return FILE_EDITED_SYMBOL + filePath
+
 def encodeTextChange(object):
-	pass
+	global currentFilePath
+	encoded = ''
+	if object[ENTITY] != currentFilePath:
+		currentFilePath = object[ENTITY]
+		encoded = encodeFileEdited(currentFilePath)
+	encoded = TEXT_CHANGE_SYMBOL
+	encoded = encoded + object[TIMESTAMP] + DELIMITER_SYMBOL
+	encoded = encoded + '' + DELIMITER_SYMBOL # the unknwon replaced text
+	encoded = encoded + object[TEXT] + DELIMITER_SYMBOL
+	encoded = encoded + object[OFFSET] + DELIMITER_SYMBOL
+	encoded = encoded + object[LENGTH] + DELIMITER_SYMBOL
+	return encoded
 
 def encodeFileOpen(object):
 	pass
@@ -55,7 +82,8 @@ def traverseFiles(folder):
 			line = line.strip('$@$')
 			object = json.loads(line,parse_int=(lambda (str): str))
 			object = stringifyDictionary(object)
-
+			if object[EVENT_TYPE] in typefunctions:
+				print typefunctions[object[EVENT_TYPE]](object)
 
 traverseFiles(sys.argv[1])
 
