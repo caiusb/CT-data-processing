@@ -37,19 +37,19 @@ def encodeTextChange(object):
 	return encoded
 
 def encodeFileOpen(object):
-	pass
+	return ''	
 
 def encodeFileClose(object):
-	pass
+	return ''
 
 def encodeSnapshot(object):
-	pass
+	return ''
 
 def encodeResourceAdded(object):
-	pass
+	return ''
 
 def encodeResourceDeleted(object):
-	pass
+	return ''
 
 typefunctions= {
 	'textChange': encodeTextChange,
