@@ -74,6 +74,7 @@ def stringifyDictionary(d):
 	return final
 
 def traverseFiles(folder):
+	changed = ''
 	files = os.listdir(folder)
 	for file in files:
 		f = open(folder + "/" + file,'r')
@@ -83,8 +84,9 @@ def traverseFiles(folder):
 			object = json.loads(line,parse_int=(lambda (str): str))
 			object = stringifyDictionary(object)
 			if object[EVENT_TYPE] in typefunctions:
-				print typefunctions[object[EVENT_TYPE]](object)
+				changed += (typefunctions[object[EVENT_TYPE]](object))
+	return changed
 
-traverseFiles(sys.argv[1])
+print traverseFiles(sys.argv[1])
 
 
