@@ -3,6 +3,7 @@
 import json
 import sys
 import os
+import base64
 
 DELIMITER_SYMBOL = '#'
 ESCAPE_SYMNOL = '~'
@@ -14,8 +15,11 @@ TEXT = 'text'
 OFFSET = 'offset'
 LENGTH = 'len'
 
+KNOWN_TEXT_FILES = ['txt', 'java', 'xml', 'mf', 'c', 'cpp', 'c', 'h']
+
 TEXT_CHANGE_SYMBOL = 't'
 FILE_EDITED_SYMBOL = 'e'
+FILE_NEW_SYMBOL = 'f'
 
 currentFilePath = ''
 
@@ -42,8 +46,20 @@ def encodeFileOpen(object):
 def encodeFileClose(object):
 	return ''
 
+def isbase64(filepath):
+	for extension in KNOWN_TEXT_FILES:
+		if filepath.endswith(extension):
+			return False
+	return True
+
 def encodeResourceAdded(object):
-	return ''
+	encoded = FILE_NEW_SYMBOL
+	encoded += object[ENTITY]
+	if isbase64(object[ENTITY]):
+		encoded += base64.b64decode(object[TEXT]) + DELIMITER_SYMBOL
+	else:
+		encoded += object[TEXT] + DELIMITER_SYMBOL
+	return encoded
 
 def encodeResourceDeleted(object):
 	return ''
@@ -69,18 +85,28 @@ def stringifyDictionary(d):
 				final[newKey] = v
 	return final
 
-def traverseFiles(folder):
+def translateFile(folder, file):
 	changed = ''
+	f = open(folder + "/" + file,'r')
+	f.readline() # first empty line
+	for line in f:
+		line = line.strip('$@$')
+		object = json.loads(line,parse_int=(lambda (str): str))
+		object = stringifyDictionary(object)
+		if object[EVENT_TYPE] in typefunctions:
+			changed += (typefunctions[object[EVENT_TYPE]](object))
+	return changed;
+
+def traverseFiles(folder):
 	files = os.listdir(folder)
 	for file in files:
-		f = open(folder + "/" + file,'r')
-		f.readline() # first empty line
-		for line in f:
-			line = line.strip('$@$')
-			object = json.loads(line,parse_int=(lambda (str): str))
-			object = stringifyDictionary(object)
-			if object[EVENT_TYPE] in typefunctions:
-				changed += (typefunctions[object[EVENT_TYPE]](object))
-	return changed
+		if os.path.isfile(folder + '/' + file):
+			print('processing ' + folder + '/' + file  + '...')
+			write(folder, translateFile(folder, file))
 
-print traverseFiles(sys.argv[1])
+def write(folder, text):
+	outputfile = 'codechanges.txt'
+	output = open(folder + "/" + outputfile, 'w')
+	output.write(text)
+
+traverseFiles(sys.argv[1])
