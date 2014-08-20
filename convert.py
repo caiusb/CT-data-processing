@@ -69,6 +69,15 @@ def encodeResourceAdded(object):
 	return encoded
 
 def encodeResourceDeleted(object):
+	encoded = FILE_DELETED_SYMBOL
+	encoded += object[ENTITY] + DELIMITER_SYMBOL
+	encoded += object[TIMESTAMP] + DELIMITER_SYMBOL
+	return encoded
+
+def encodeRefreshFileOperation(object):
+	return ''
+
+def encodeFileSaveOperation(object):
 	return ''
 
 typefunctions= {
@@ -77,6 +86,8 @@ typefunctions= {
 	'fileClose': encodeFileClose,
 	'resourceAdded': encodeResourceAdded,
 	'resourceDeleted': encodeResourceDeleted,
+	'refresh': encodeRefreshFileOperation,
+	'fileSave': encodeFileSaveOperation
 }
 
 def stringifyDictionary(d):
