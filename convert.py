@@ -34,13 +34,13 @@ def encodeTextChange(object):
 	encoded = ''
 	if object[ENTITY] != currentFilePath:
 		currentFilePath = object[ENTITY]
-		encoded = encodeFileEdited(currentFilePath, object[TIMESTAMP])
-	encoded = TEXT_CHANGE_SYMBOL
-	encoded = encoded + '' + DELIMITER_SYMBOL # the unknwon replaced text
-	encoded = encoded + escapeString(object[TEXT]) + DELIMITER_SYMBOL
-	encoded = encoded + object[OFFSET] + DELIMITER_SYMBOL
-	encoded = encoded + object[LENGTH] + DELIMITER_SYMBOL
-	encoded = encoded + object[TIMESTAMP] + DELIMITER_SYMBOL
+		encoded += encodeFileEdited(currentFilePath, object[TIMESTAMP])
+	encoded += TEXT_CHANGE_SYMBOL
+	encoded += '' + DELIMITER_SYMBOL # the unknwon replaced text
+	encoded += escapeString(object[TEXT]) + DELIMITER_SYMBOL
+	encoded += object[OFFSET] + DELIMITER_SYMBOL
+	encoded += object[LENGTH] + DELIMITER_SYMBOL
+	encoded += object[TIMESTAMP] + DELIMITER_SYMBOL
 	return encoded
 
 def encodeFileOpen(object):
