@@ -15,7 +15,7 @@ TEXT = 'text'
 OFFSET = 'offset'
 LENGTH = 'len'
 
-KNOWN_TEXT_FILES = ['txt', 'java', 'xml', 'mf', 'c', 'cpp', 'c', 'h']
+KNOWN_TEXT_FILES = ['.txt', '.java', '.xml', '.mf', '.c', '.cpp', '.c', '.h']
 
 TEXT_CHANGE_SYMBOL = 't'
 FILE_EDITED_SYMBOL = 'e'
