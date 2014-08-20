@@ -20,6 +20,8 @@ KNOWN_TEXT_FILES = ['.txt', '.java', '.xml', '.mf', '.c', '.cpp', '.c', '.h']
 TEXT_CHANGE_SYMBOL = 't'
 FILE_EDITED_SYMBOL = 'e'
 FILE_NEW_SYMBOL = 'f'
+FILE_DELETE_SYMBOL = 'N'
+FILE_OPEN_SYMBOL = 'f'
 
 currentFilePath = ''
 
