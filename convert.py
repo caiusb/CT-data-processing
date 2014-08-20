@@ -109,11 +109,11 @@ def translateFile(folder, file):
 	f.readline() # first empty line
 	for line in f:
 		line = line.strip('$@$')
-		object = json.loads(line,parse_int=(lambda (str): str))
+		object = json.loads(line, parse_int=(lambda (str): str)) #don't parse int's
 		object = stringifyDictionary(object)
 		if object[EVENT_TYPE] in typefunctions:
 			changed += (typefunctions[object[EVENT_TYPE]](object))
-	return changed;
+	return changed
 
 def traverseFiles(folder):
 	files = os.listdir(folder)
