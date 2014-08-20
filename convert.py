@@ -59,7 +59,8 @@ def encodeResourceAdded(object):
 	encoded = FILE_NEW_SYMBOL
 	encoded += object[ENTITY] + DELIMITER_SYMBOL
 	if isbase64(object[ENTITY]):
-		encoded += escapeString(base64.b64decode(object[TEXT])) + DELIMITER_SYMBOL
+		decoded = base64.b64decode(object[TEXT])
+		encoded += escapeString(decoded) + DELIMITER_SYMBOL
 	else:
 		encoded += escapeString(object[TEXT]) + DELIMITER_SYMBOL
 	encoded += object[TIMESTAMP] + DELIMITER_SYMBOL
