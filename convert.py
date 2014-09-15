@@ -122,6 +122,7 @@ def translateFile(folder, file):
 
 def traverseFiles(folder):
 	files = os.listdir(folder)
+	files.sort(key = lambda x: os.stat(os.path.join(folder, x)).st_mtime)
 	for file in files:
 		if os.path.isfile(folder + '/' + file):
 			print('processing ' + folder + '/' + file  + '...')
