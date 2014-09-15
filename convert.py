@@ -28,7 +28,7 @@ FILE_OPEN_SYMBOL = 'f'
 currentFilePath = ''
 
 def escapeString(string):
-	return string.replace(DELIMITER_SYMBOL,ESCAPE_SYMBOL+DELIMITER_SYMBOL).replace(ESCAPE_SYMBOL,ESCAPE_SYMBOL+ESCAPE_SYMBOL)
+	return string.replace(ESCAPE_SYMBOL,ESCAPE_SYMBOL+ESCAPE_SYMBOL).replace(DELIMITER_SYMBOL,ESCAPE_SYMBOL+DELIMITER_SYMBOL)
 
 def encodeFileEdited(filePath, timestamp):
 	return FILE_EDITED_SYMBOL + filePath + DELIMITER_SYMBOL + timestamp + DELIMITER_SYMBOL
