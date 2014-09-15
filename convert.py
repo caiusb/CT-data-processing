@@ -8,6 +8,8 @@ import base64
 DELIMITER_SYMBOL = '#'
 ESCAPE_SYMBOL = '~'
 
+LINE_BEGIN_SEQUENCE = '$@$';
+
 EVENT_TYPE = 'eventType'
 TIMESTAMP = 'timestamp'
 ENTITY = 'entityAddress'
@@ -108,7 +110,7 @@ def translateFile(folder, file):
 	f = open(folder + "/" + file,'r')
 	f.readline() # first empty line
 	for line in f:
-		line = line.strip('$@$')
+		line = line.strip(LINE_BEGIN_SEQUENCE)
 		object = json.loads(line, parse_int=(lambda (str): str)) #don't parse int's
 		object = stringifyDictionary(object)
 		if object[EVENT_TYPE] in typefunctions:
