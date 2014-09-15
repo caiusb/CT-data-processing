@@ -126,7 +126,7 @@ def traverseFiles(folder):
 
 def write(folder, text):
 	outputfile = 'codechanges.txt'
-	output = open(folder + "/" + outputfile, 'w')
+	output = open(folder + "/" + outputfile, 'a')
 	output.write(text)
 
 if len(sys.argv) < 2:
