@@ -92,6 +92,9 @@ typefunctions= {
 	'fileSave': encodeFileSaveOperation
 }
 
+'''
+I convert a dictionary from unicode encode to plain ascii.
+'''
 def stringifyDictionary(d):
 	final = {}
 	for k,v in d.items():
