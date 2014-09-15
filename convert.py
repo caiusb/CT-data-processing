@@ -127,4 +127,7 @@ def write(folder, text):
 	output = open(folder + "/" + outputfile, 'w')
 	output.write(text)
 
-traverseFiles(sys.argv[1])
+if len(sys.argv) < 2:
+	print "Usage: convert.py <folder-with-things>"
+else:
+	traverseFiles(sys.argv[1])
